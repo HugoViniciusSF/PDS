@@ -20,7 +20,7 @@
 <h2 id="objectives"> 🛠 Introdução </h2>
 
 O projeto se baseia em um sistema de gerenciamento de monitorias, simplificando e centralizando as dúvidas dos alunos em um só lugar.
-Pretendemos implementar a conexão com o Discord, fututras atualizações para o projeto.
+Pretendemos implementar a conexão com o Discord, futuras atualizações para o projeto.
 
 <h2 id="usage" > 💻 Tutorial </h2>
 
