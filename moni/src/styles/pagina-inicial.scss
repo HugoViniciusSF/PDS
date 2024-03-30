@@ -1,143 +1,121 @@
+/* Estilos para a página de autenticação */
 #page-auth {
-    display: flex;
-    align-items: stretch;
-    height: 100vh;
-  
-    aside {
-      flex: 7;
-  
-      background: #5afd90;
-      color: #FFF;
-  
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      
-      padding: 120px 80px;
-  
-      img {
-        max-width: 320px;
-      }
-  
-      strong {
-        font: 700 36px 'Poppins', sans-serif;
-        line-height: 42px;
-        margin-top: 16px;
-      }
-  
-      p {
-        font-size: 24px;
-        line-height: 32px;
-        margin-top: 16px;
-        color: #f8f8f8;
-      }
-    }
-  
-    main {
-      flex: 8;
-  
-      padding: 0 32px;
-  
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .main-content {
-      display: flex;
-      flex-direction:column;
-      width: 100%;
-      max-width: 320px;
-      align-items: stretch;
-      text-align: center;
-  
-      > img {
-        align-self: center;
-      }
-  
-      h2 {
-        font-size: 24px;
-        margin: 64px 0 24px;
-        font-family: 'Poppins', sans-serif;
-      }
-  
-      form {
-        input {
-          height: 50px;
-          border-radius: 8px;
-          padding: 0 16px;
-          background: #FFF;
-          border: 1px solid #a8a8b3;
-        }
-  
-        button { 
-          margin-top: 16px;
-        }
-  
-        button, input {
-          width: 100%;
-        }
-      }
-  
-      p {
-        font-size: 14px;
-        color: #737380;
-        margin-top: 16px;
-  
-        a {
-          color: #5afd90;
-        }
-      }
-    }
-  
-    .create-room {
-      margin-top: 64px;
-      height: 50px;
-      border-radius: 8px;
-      font-weight: 500;
-      background: #eb8177;
-      color: #FFF;
-  
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  
-      cursor: pointer;
-      border: 0;
-  
-      transition: filter 0.2s;
-  
-      img {
-        margin-right: 8px;
-      }
-  
-      &:hover {
-        filter: brightness(0.9);
-      }
-    }
-  
-    .separator {
-      font-size: 14px;
-      color: #a8a8b3;
-  
-      margin: 32px 0;
-      display: flex;
-      align-items: center;
-  
-      &::before {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: #a8a8b3;
-        margin-right: 16px;
-      }
-  
-      &::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: #a8a8b3;
-        margin-left: 16px;
-      }
-    }
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+
+/* Estilos para a barra lateral */
+aside {
+  flex: 3;
+  background: linear-gradient(135deg, #1d2422, #04b166);
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  img {
+    max-width: 80%;
+    align-self: center;
   }
+
+  strong {
+    font: 700 36px 'Poppins', sans-serif;
+    line-height: 1.2;
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-top: 16px;
+    text-align: center;
+  }
+}
+
+
+/* Estilos para a seção principal */
+main {
+  flex: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222020;
+}
+
+/* Estilos para o conteúdo principal */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  align-items: center;
+
+  h2 {
+    font-size: 28px;
+    margin: 48px 0 24px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  input {
+    height: 50px;
+    border-radius: 5px;
+    padding: 24px;
+    background: #FFF;
+    width: 100%;
+    margin-bottom: 16px;
+    font-size: px;
+    color: #333;
+    transition: border-color 0.3s;
+  }
+
+  button {
+    height: 65px;
+    border-radius: 6px;
+    padding: 0 24px;
+    background-color: rgb(75, 74, 74);
+    color: #FFF;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+  }
+
+  button:hover {
+    background-color: #02791c;
+  }
+
+  
+}
+
+/* Estilos para o botão de criar sala */
+.create-room {
+  margin-top: 32px;
+  height: 50px;
+  border-radius: 25px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 0;
+  transition: filter 0.2s;
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+/* Estilos para o separador */
+.separator {
+  font-size: 16px;
+  color: #FFF;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+
+}
+}

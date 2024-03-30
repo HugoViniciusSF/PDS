@@ -16,7 +16,7 @@ type AutenticacaoProviderProps = {
   children: ReactNode;
 };
 
-export const Autenticacao = createContext({} as AutenticacaoType);
+export const AutenticacaoContext = createContext({} as AutenticacaoType);
 
 export function AutenticacaoProvider(props: AutenticacaoProviderProps) {
   const [usuario, setUsuario] = useState<Usuario>();
@@ -68,8 +68,10 @@ export function AutenticacaoProvider(props: AutenticacaoProviderProps) {
     }
   }
   return (
-    <Autenticacao.Provider value={{ usuario: usuario, signInWithGoogle }}>
+    <AutenticacaoContext.Provider
+      value={{ usuario: usuario, signInWithGoogle }}
+    >
       {props.children}
-    </Autenticacao.Provider>
+    </AutenticacaoContext.Provider>
   );
 }

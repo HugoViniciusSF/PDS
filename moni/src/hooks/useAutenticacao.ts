@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { Autenticacao } from '../contexts/Autenticacao';
+import { AutenticacaoContext } from '../contexts/AutenticacaoContext';
 
 export function useAutenticacao(){
-    const value = useContext(Autenticacao);
+    const value = useContext(AutenticacaoContext);
 
     return value;
 }

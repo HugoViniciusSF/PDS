@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AutenticacaoProvider } from "./contexts/Autenticacao";
+import { AutenticacaoProvider } from "./contexts/AutenticacaoContext";
 import { NovaSala } from "./pages/NovaSala";
 import { PaginaInicial } from "./pages/PaginaInicial";
 import { Sala } from "./pages/Sala";
