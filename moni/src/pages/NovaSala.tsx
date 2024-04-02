@@ -3,7 +3,7 @@ import logo1 from "../assets/images/logo_transparente.png";
 import logo from "../assets/images/logo.png";
 
 import { FormEvent, useState } from "react";
-import "../styles/pagina-inicial";
+import "../styles/pagina-inicial.scss";
 import { Button } from "../components/Button";
 import { useAutenticacao } from "../hooks/useAutenticacao";
 import { database } from "../services/firebase";
@@ -23,7 +23,7 @@ export function NovaSala() {
 
     const novaSalaRef = push(SalaRef);
     const novaSalaKey = novaSalaRef.key;
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const firebaseSala = set(novaSalaRef, {
       title: novaSala,
       author: usuario?.id,
@@ -32,5 +32,32 @@ export function NovaSala() {
     navigate(`/salas/${novaSalaKey}`);
   }
 
-  return <div>sala nova</div>;
+  return (
+    <div id="page-auth">
+      <aside>
+        <img src={logo1} alt="Logo" />
+        <strong>Crie sua sala e tire dúvidas</strong>
+        <p>Auxilie os alunos a entenderem os conteúdos</p>
+      </aside>
+      <main>
+        <div className="main-content">
+          <img src={logo} alt="MoniApp" />
+          <h1>Bem-vindo {usuario?.nome}</h1>
+          <h2>Criar uma nova Sala</h2>
+          <form onSubmit={CriarSala}>
+            <input
+              type="text"
+              placeholder="Nome da Sala"
+              onChange={(event) => setNovaSala(event.target.value)}
+              value={novaSala}
+            />
+            <Button type="submit">Crie a sala</Button>
+          </form>
+          <p>
+            Quer entrar em uma Sala? <Link to="/">Clique</Link>
+          </p>
+        </div>
+      </main>
+    </div>
+  );
 }

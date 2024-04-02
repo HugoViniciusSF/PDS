@@ -30,6 +30,7 @@ aside {
     line-height: 1.5;
     margin-top: 16px;
     text-align: center;
+    
   }
 }
 
@@ -55,6 +56,7 @@ main {
     font-size: 28px;
     margin: 48px 0 24px;
     font-family: 'Poppins', sans-serif;
+    color: #04b166;
   }
 
   form {
@@ -72,7 +74,9 @@ main {
     color: #333;
     transition: border-color 0.3s;
   }
-
+  p{
+    color: #04b166;
+  }
   button {
     height: 65px;
     border-radius: 6px;
