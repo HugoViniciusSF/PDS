@@ -51,6 +51,10 @@ main {
   width: 100%;
   max-width: 400px;
   align-items: center;
+  h1{
+    color: #04b166;
+    font-size: 26px;
+  }
 
   h2 {
     font-size: 28px;
@@ -76,6 +80,7 @@ main {
   }
   p{
     color: #04b166;
+    margin-top: 10px;
   }
   button {
     height: 65px;

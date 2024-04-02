@@ -26,7 +26,7 @@ export function PaginaInicial() {
       return;
     }
 
-    const salaRef = await get(ref(database, `rooms/${codigoSala}`));
+    const salaRef = await get(ref(database, `salas/${codigoSala}`));
 
     if (!salaRef.exists()) {
       alert("Sala inexistente");
