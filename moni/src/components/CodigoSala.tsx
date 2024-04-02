@@ -1,5 +1,5 @@
 import copyImg from "../assets/images/copy.svg";
-import "../styles/room-code.scss";
+import "../styles/codigo-sala.scss";
 
 type CodigoSalaProps = {
   code: string;
