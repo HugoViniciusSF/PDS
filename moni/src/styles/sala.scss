@@ -13,6 +13,12 @@
                 max-height: 160px;
             }
         }
+        
+    }
+    main{
+        max-width: 800px;
+        margin: 50px auto;
+
         .sala-titulo{
             margin: 32px 0 24px;
             display: flex;
@@ -34,10 +40,6 @@
                 font-size: 18px;
             }
         }
-    }
-    main{
-        max-width: 800px;
-        margin: 50px auto;
 
         form{
             textarea{
