@@ -1,34 +1,26 @@
-#page-room{
+#pagina-sala{
     header{
-        padding: 24px;
         border-bottom: 1px solid #e2e2e2;
-
-        .content{
+        background-color: #02791c;
+        .conteudo{
             max-width: 1120px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
 
-
             > img {
-                max-height: 45px;
+                max-height: 160px;
             }
         }
-    }
-    main{
-        max-width: 800px;
-        margin: 0 auto;
-
-
-        .room-title{
+        .sala-titulo{
             margin: 32px 0 24px;
             display: flex;
             align-items: center;
 
             h1{
                 font-family: 'Poppins', sans-serif;
-                font-size: 24px;
+                font-size: 36px;
                 color: #29292e;
             }
 
@@ -39,9 +31,13 @@
                 padding: 8px 16px;
                 color: #fff;
                 font-weight: 500;
-                font-size: 14px;
+                font-size: 18px;
             }
         }
+    }
+    main{
+        max-width: 800px;
+        margin: 50px auto;
 
         form{
             textarea{
@@ -55,13 +51,13 @@
                 min-height: 130px;
             }
 
-            .form-footer{
+            .form-rodape{
                 display: flex;
                 justify-content:space-between;
                 align-items: center;
                 margin-top: 16px;
 
-                .user-info{
+                .usuario-info{
                     display: flex;
                     align-items: center;
 

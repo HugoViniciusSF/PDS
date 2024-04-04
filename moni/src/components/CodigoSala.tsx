@@ -1,4 +1,4 @@
-import copyImg from "../assets/images/copy.svg";
+import copyImg from "../assets/images/copiar.svg";
 import "../styles/codigo-sala.scss";
 
 type CodigoSalaProps = {
@@ -9,7 +9,7 @@ export function CodigoSala(props: CodigoSalaProps) {
     navigator.clipboard.writeText(props.code);
   }
   return (
-    <button className="room-code" onClick={copyRoomCodeToClipboard}>
+    <button className="sala-code" onClick={copyRoomCodeToClipboard}>
       <div>
         <img src={copyImg} alt="copiar codigo do quarto" />
       </div>

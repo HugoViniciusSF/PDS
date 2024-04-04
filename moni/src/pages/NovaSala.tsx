@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo1 from "../assets/images/logo_transparente.png";
 import logo from "../assets/images/logo.png";
-
 import { FormEvent, useState } from "react";
 import "../styles/pagina-inicial.scss";
 import { Button } from "../components/Button";
 import { useAutenticacao } from "../hooks/useAutenticacao";
 import { database } from "../services/firebase";
 import { set, ref, push } from "firebase/database";
+
 export function NovaSala() {
   const { usuario } = useAutenticacao();
   const [novaSala, setNovaSala] = useState("");
