@@ -12,6 +12,14 @@
             > img {
                 max-height: 160px;
             }
+            > div {
+                display: flex;
+                gap: 16px;
+        
+                button {
+                  height: 40px;
+                }
+              }
         }
         
     }
@@ -94,6 +102,8 @@
                 }
             }
         }
-        
+        .questao-lista {
+            margin-top: 32px;
+          }  
     }
 }

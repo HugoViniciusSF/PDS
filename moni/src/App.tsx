@@ -3,7 +3,7 @@ import { AutenticacaoProvider } from "./contexts/AutenticacaoContext";
 import { NovaSala } from "./pages/NovaSala";
 import { PaginaInicial } from "./pages/PaginaInicial";
 import { Sala } from "./pages/Sala";
-
+import { AdminSala } from "./pages/AdminSala";
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +12,7 @@ function App() {
           <Route path="/" element={<PaginaInicial />} />
           <Route path="/salas/nova" element={<NovaSala />} />
           <Route path="/salas/:id" element={<Sala />} />
+          <Route path="/admin/salas/:id" element={<AdminSala />} />
         </Routes>
       </AutenticacaoProvider>
     </BrowserRouter>

@@ -32,7 +32,10 @@ export function PaginaInicial() {
       alert("Sala inexistente");
       return;
     }
-
+    if (salaRef.val().endedAt) {
+      alert("Room already closed.");
+      return;
+    }
     navigate(`/salas/${codigoSala}`);
   }
 
