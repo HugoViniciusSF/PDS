@@ -38,7 +38,7 @@
                 color: #29292e;
             }
 
-            span{
+            span {
                 margin-left: 16px;
                 background: #04b166;
                 border-radius: 9999px;
@@ -46,7 +46,13 @@
                 color: #fff;
                 font-weight: 500;
                 font-size: 18px;
-            }
+              }
+              span.respondidas {
+                background: #04b;
+              }
+              span.falta-responder {
+                background: red;
+              }
         }
 
         form{

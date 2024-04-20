@@ -8,7 +8,8 @@ import { useSala } from "../hooks/useSala";
 import { ref, update, remove } from "firebase/database";
 import { database } from "../services/firebase";
 import "../styles/sala.scss";
-
+import checkImg from "../assets/images/check.svg";
+import answerImg from "../assets/images/answer.svg";
 type SalaParams = {
   id: string;
 };
@@ -33,6 +34,18 @@ export function AdminSala() {
     }
   }
 
+  async function questaoStatus(questaoId: string) {
+    await update(ref(database, `salas/${salaId}/questoes/${questaoId}`), {
+      isAnswered: true,
+    });
+  }
+
+  async function responderQuestao(questaoId: string) {
+    await update(ref(database, `salas/${salaId}/questoes/${questaoId}`), {
+      isHighlighted: true,
+    });
+  }
+
   return (
     <div id="pagina-sala">
       <header>
@@ -50,23 +63,63 @@ export function AdminSala() {
       <main>
         <div className="sala-titulo">
           <h1>Sala {titulo}</h1>
-          {questoes.length > 0 && <span>{questoes.length} pergunta(s)</span>}
+          {questoes.length > 0 && <span>{questoes.length} Pergunta(s)</span>}
+
+          {questoes.filter((questao) => questao.isAnswered).length > 0 && (
+            <span className="respondidas">
+              {questoes.filter((questao) => questao.isAnswered).length}{" "}
+              Respondida(s)
+            </span>
+          )}
+
+          {questoes.filter((questao) => !questao.isAnswered).length > 0 && (
+            <span className="falta-responder">
+              {questoes.filter((questao) => !questao.isAnswered).length}{" "}
+              Responder
+            </span>
+          )}
         </div>
 
         <div className="questao-lista">
-          {questoes.map((questao) => {
-            return (
-              <Questao
-                key={questao.id}
-                content={questao.content}
-                author={questao.author}
-              >
-                <button type="button" onClick={() => deletaQuestao(questao.id)}>
-                  <img src={deleteImg} alt="Remover pergunta" />
-                </button>
-              </Questao>
-            );
-          })}
+          {questoes
+            .slice()
+            .sort((a, b) =>
+              a.isAnswered === b.isAnswered ? 0 : a.isAnswered ? 1 : -1
+            )
+            .map((questao) => {
+              return (
+                <Questao
+                  key={questao.id}
+                  content={questao.content}
+                  author={questao.author}
+                  isAnswered={questao.isAnswered}
+                  isHighlighted={questao.isHighlighted}
+                >
+                  {!questao.isAnswered && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => questaoStatus(questao.id)}
+                      >
+                        <img src={checkImg} alt="Respondido" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => responderQuestao(questao.id)}
+                      >
+                        <img src={answerImg} alt="Destaque" />
+                      </button>
+                    </>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => deletaQuestao(questao.id)}
+                  >
+                    <img src={deleteImg} alt="Remover pergunta" />
+                  </button>
+                </Questao>
+              );
+            })}
         </div>
       </main>
     </div>

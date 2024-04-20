@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-
+import cx from "classnames";
 import "./styles.scss";
 
 type QuestaoProps = {
@@ -9,11 +9,25 @@ type QuestaoProps = {
     avatar: string;
   };
   children?: ReactNode;
+  isAnswered?: boolean;
+  isHighlighted?: boolean;
 };
 
-export function Questao({ content, author, children }: QuestaoProps) {
+export function Questao({
+  content,
+  author,
+  isAnswered = false,
+  isHighlighted = false,
+  children,
+}: QuestaoProps) {
   return (
-    <div className="question">
+    <div
+      className={cx(
+        "question",
+        { answered: isAnswered },
+        { highlighted: isHighlighted && !isAnswered }
+      )}
+    >
       <p>{content}</p>
       <footer>
         <div className="user-info">
