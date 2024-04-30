@@ -130,6 +130,37 @@ export function Sala() {
     await set(newQuestaoRef, questao);
 
     setNovaQuestao("");
+
+    const objeto = JSON.stringify({
+      nome: usuario.nome,
+      fotoURL: usuario?.avatar,
+      descricao: novaQuestao,
+      respondido: false,
+      prioridade: false,
+    });
+
+    // ENVIAR COM FETCHER PARA A PORTA
+    fetch("http://localhost:3001/questoes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nome: usuario.nome,
+        fotoURL: usuario?.avatar,
+        descricao: novaQuestao,
+        respondido: false,
+        prioridade: false,
+      }),
+    });
+    // const objeto = JSON.stringify({
+    //   nome: usuario.nome,
+    //   fotoURL: usuario?.avatar,
+    //   descricao: novaQuestao,
+    //   respondido: false,
+    //   prioridade: false,
+    // });
+    // console.log(objeto);
   }
 
   async function LikeQuestao(questaoId: string, likeId: string | undefined) {
