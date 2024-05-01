@@ -7,36 +7,84 @@ import logo1 from "../assets/images/logo_transparente.png";
 import logo from "../assets/images/logo.png";
 import { Button } from "../components/Button";
 import "../styles/pagina-inicial.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export function PaginaInicial() {
   const navigate = useNavigate();
   const { usuario, signInWithGoogle } = useAutenticacao();
   const [codigoSala, setCodigoSala] = useState("");
-
+  const notificacaoAlerta = () =>
+    toast.warn("Sala Inexistente", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  const notificacaoErro = () =>
+    toast.error("Sala Finalizada", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  const notificacaoInfo = () =>
+    toast.info("Antes de clicar, escreva o código da sala", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  const notificacaoSucesso = () =>
+    toast.success("UHUUU, VAMOS LÁ", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   async function criarSala() {
     if (!usuario) {
       await signInWithGoogle();
     }
-
     navigate("/salas/nova");
   }
 
   async function entrarSala(event: FormEvent) {
     event.preventDefault();
     if (codigoSala.trim() === "") {
+      notificacaoInfo();
       return;
     }
 
     const salaRef = await get(ref(database, `salas/${codigoSala}`));
 
     if (!salaRef.exists()) {
-      alert("Sala inexistente");
+      notificacaoAlerta();
       return;
     }
     if (salaRef.val().endedAt) {
-      alert("Room already closed.");
+      notificacaoErro();
       return;
     }
-    navigate(`/salas/${codigoSala}`);
+    notificacaoSucesso();
+    setTimeout(() => {
+      navigate(`/salas/${codigoSala}`);
+    }, 3000);
   }
 
   return (
@@ -47,6 +95,7 @@ export function PaginaInicial() {
         <p>Tire as dúvidas dos estudantes</p>
       </aside>
       <main>
+        <ToastContainer />
         <div className="main-content">
           <img src={logo} alt="MoniApp" />
           <form onSubmit={entrarSala}>

@@ -139,28 +139,14 @@ export function Sala() {
       prioridade: false,
     });
 
-    // ENVIAR COM FETCHER PARA A PORTA
+    // conexao com o bd usando fetch
     fetch("http://localhost:3001/questoes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        nome: usuario.nome,
-        fotoURL: usuario?.avatar,
-        descricao: novaQuestao,
-        respondido: false,
-        prioridade: false,
-      }),
+      body: objeto,
     });
-    // const objeto = JSON.stringify({
-    //   nome: usuario.nome,
-    //   fotoURL: usuario?.avatar,
-    //   descricao: novaQuestao,
-    //   respondido: false,
-    //   prioridade: false,
-    // });
-    // console.log(objeto);
   }
 
   async function LikeQuestao(questaoId: string, likeId: string | undefined) {

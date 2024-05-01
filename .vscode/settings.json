@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "moni_app",
+            "database": "C:\\Users\\Hugo\\Desktop\\Moni\\moni-back-end\\back-end\\db\\sql"
+        }
+    ]
+}
