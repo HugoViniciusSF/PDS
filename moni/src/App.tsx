@@ -4,6 +4,7 @@ import { NovaSala } from "./pages/NovaSala";
 import { PaginaInicial } from "./pages/PaginaInicial";
 import { Sala } from "./pages/Sala";
 import { AdminSala } from "./pages/AdminSala";
+import { PerguntasDiscord } from "./pages/PerguntasDiscord";
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
           <Route path="/salas/nova" element={<NovaSala />} />
           <Route path="/salas/:id" element={<Sala />} />
           <Route path="/admin/salas/:id" element={<AdminSala />} />
+          <Route path="/discord/" element={<PerguntasDiscord />} />
         </Routes>
       </AutenticacaoProvider>
     </BrowserRouter>
