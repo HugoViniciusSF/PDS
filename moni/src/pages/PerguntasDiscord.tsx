@@ -6,6 +6,7 @@ import { ref, onValue } from "firebase/database";
 
 type FirebaseQuestions = Record<string, {
   server_name: string;
+  channel: string;
   message_id: string;
   reacted_users: Record<string, string>;
   reaction_count: number;
@@ -52,8 +53,11 @@ export function PerguntasDiscord() {
                   />
                   <span>{value.username}</span>
                 </div>
-                <div className="servidor-info">
-                  <span title={value.server_name}>{value.server_name}</span>
+                <div className="servidor-canal-info">
+                  <span className="servidor-info" title={value.server_name}>
+                    {value.server_name}
+                  </span>
+                  <span className="canal-info">#{value.channel}</span>
                 </div>
               </div>
               <p className="pergunta-mensagem">{value.user_message}</p>

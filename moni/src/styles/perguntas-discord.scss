@@ -56,20 +56,30 @@
           justify-content: space-between;
           margin-bottom: 16px;
 
-          .servidor-info {
-            background: #7289da;
-            border-radius: 9999px;
-            padding: 8px 16px;
-            color: #fff;
-            font-weight: 500;
-            font-size: 14px;
-            max-width: 200px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+          .servidor-canal-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
   
-            span {
+            .servidor-info {
+              background: #7289da;
+              border-radius: 9999px;
+              padding: 8px 16px;
+              color: #fff;
+              font-weight: 500;
+              font-size: 14px;
+              max-width: 200px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin-bottom: 4px;
               cursor: pointer;
+            }
+  
+            .canal-info {
+              color: #fff;
+              background: #726969;
+              font-size: 12px;
             }
           }
   
