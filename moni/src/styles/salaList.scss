@@ -1,0 +1,43 @@
+
+.sala-list {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 300px; /* Limite de altura */
+    overflow-y: auto; /* Overflow scroll */
+  }
+  
+  .sala-list h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .sala-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sala-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .sala-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sala-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .sala-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #777;
+  }
+  

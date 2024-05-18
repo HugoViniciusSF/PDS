@@ -1,0 +1,167 @@
+
+$secondary-color: #ffffff; 
+$background-color: #f0f2f5; 
+$header-height: 60px;
+$sidebar-width: 250px;
+$card-background: #ffffff;
+$card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background: $background-color;
+
+  &-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $header-height;
+    background: linear-gradient(135deg, #1d2422, #04b166);
+    color: $secondary-color;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+
+    h1 {
+      margin: 0;
+      font-size: 24px; 
+    }
+
+    &-nav {
+      display: flex;
+      align-items: center;
+
+      a {
+        margin-left: 20px;
+        color: $secondary-color;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease; 
+        &:hover {
+          color: darken($secondary-color, 10%); 
+        }
+
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+
+  &-sidebar {
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    width: $sidebar-width;
+    height: calc(100vh - $header-height);
+    background: linear-gradient(135deg, #1d2422, #04b166);
+    padding-top: 20px;
+    transition: box-shadow 0.3s ease; 
+    overflow-y: auto; 
+
+    &:hover {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    }
+  
+    nav ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        margin: 20px 0;
+        text-align: center;
+  
+        a {
+          color: $secondary-color;
+          text-decoration: none;
+          font-size: 16px;
+          transition: color 0.3s ease; 
+          &:hover {
+            color: darken($secondary-color, 10%); 
+          }
+        }
+      }
+    }
+  }
+
+  &-main {
+    margin-left: $sidebar-width;
+    margin-top: $header-height;
+    padding: 20px;
+    flex: 1;
+    background-color: $secondary-color;
+    overflow-y: auto;
+
+    &-section {
+      margin-bottom: 20px;
+
+      h2 {
+        margin-top: 0;
+        font-size: 20px; 
+      }
+
+      .dashboard-cards {
+        display: flex;
+        gap: 20px;
+
+        .card {
+          flex: 1;
+          background: rgba(204, 198, 198, 0.253);
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: $card-shadow;
+          display: flex;
+          align-items: center;
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+        
+          .qtsEnviada {
+            background-color: rgb(69, 138, 228);
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+          }
+        
+          .qtsRespondidas {
+            background-color: rgb(69, 228, 117);
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+          }
+        
+          .qtsNRespondidas {
+            background-color: rgb(228, 117, 117);
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+          }
+          .alunosCadastrados{
+            background-color: rgb(228, 226, 117);
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+          }
+        }
+        
+      }
+
+      .chart {
+        height: 300px;
+        background-color: $card-background;
+        border-radius: 8px;
+        box-shadow: $card-shadow;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+  .section-spacing {
+    margin-bottom: 30px; 
+  }
+}

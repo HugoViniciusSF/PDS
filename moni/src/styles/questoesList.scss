@@ -1,0 +1,44 @@
+// src/styles/questoesList.scss
+
+.questoes-list {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .questoes-list h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .questoes-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .questoes-list .questao-info {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .questao-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .questao-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .questao-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #777;
+  }
+  
