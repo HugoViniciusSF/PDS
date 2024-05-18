@@ -12,6 +12,7 @@ type FirebaseQuestions = Record<string, {
   reaction_count: number;
   user_message: string;
   username: string;
+  user_avatar_url: string;
 }>;
 
 export function PerguntasDiscord() {
@@ -48,8 +49,9 @@ export function PerguntasDiscord() {
               <div className="pergunta-info">
                 <div className="usuario-info">
                   <img
-                    src={`https://cdn.discordapp.com/avatars/${value.message_id}/${value.message_id}.png`}
+                    src={value.user_avatar_url}
                     alt={value.username}
+                    className="avatar"
                   />
                   <span>{value.username}</span>
                 </div>
