@@ -64,7 +64,7 @@ export function PerguntasDiscord() {
               </div>
               <p className="pergunta-mensagem">{value.user_message}</p>
               <div className="reacoes-info">
-                <span>{value.reaction_count} reações</span>
+                <span>reações: {value.reaction_count}</span>
               </div>
             </div>
           );
