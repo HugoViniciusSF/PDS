@@ -128,10 +128,13 @@ export function Sala() {
     const questaoRef = ref(database, `salas/${salaId}/questoes`);
     const newQuestaoRef = push(questaoRef);
     await set(newQuestaoRef, questao);
-
+    console.log(newQuestaoRef);
+    const questaoId = newQuestaoRef.key;
+    console.log(questaoId);
     setNovaQuestao("");
 
     const objeto = JSON.stringify({
+      id: questaoId,
       nome: usuario.nome,
       fotoURL: usuario?.avatar,
       descricao: novaQuestao,

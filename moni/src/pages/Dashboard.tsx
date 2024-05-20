@@ -4,13 +4,13 @@ import SalaList from "../components/SalaList";
 import UserList from "../components/UserList";
 import QuestoesList from "../components/QuestoesList";
 
-const salas = [
-  { id: 1, name: "Sala 1", description: "Descrição da Sala 1" },
-  { id: 2, name: "Sala 2", description: "Descrição da Sala 2" },
-  { id: 3, name: "Sala 3", description: "Descrição da Sala 3" },
-  { id: 4, name: "Sala 4", description: "Descrição da Sala 4" },
-  { id: 5, name: "Sala 5", description: "Descrição da Sala 5" },
-];
+// const salas = [
+//   { id: 1, name: "Sala 1", description: "Descrição da Sala 1" },
+//   { id: 2, name: "Sala 2", description: "Descrição da Sala 2" },
+//   { id: 3, name: "Sala 3", description: "Descrição da Sala 3" },
+//   { id: 4, name: "Sala 4", description: "Descrição da Sala 4" },
+//   { id: 5, name: "Sala 5", description: "Descrição da Sala 5" },
+// ];
 
 type Questao = {
   id: number;

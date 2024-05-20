@@ -4,16 +4,19 @@ import { useEffect, useState } from "react";
 import { database } from "../services/firebase";
 import { ref, onValue } from "firebase/database";
 
-type FirebaseQuestions = Record<string, {
-  server_name: string;
-  channel: string;
-  message_id: string;
-  reacted_users: Record<string, string>;
-  reaction_count: number;
-  user_message: string;
-  username: string;
-  user_avatar_url: string;
-}>;
+type FirebaseQuestions = Record<
+  string,
+  {
+    server_name: string;
+    channel: string;
+    message_id: string;
+    reacted_users: Record<string, string>;
+    reaction_count: number;
+    user_message: string;
+    username: string;
+    user_avatar_url: string;
+  }
+>;
 
 export function PerguntasDiscord() {
   const [questions, setQuestions] = useState<FirebaseQuestions>({});

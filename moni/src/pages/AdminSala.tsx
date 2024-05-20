@@ -31,6 +31,24 @@ export function AdminSala() {
   async function deletaQuestao(questaoId: string) {
     if (window.confirm("Tem certeza que você deseja excluir esta pergunta?")) {
       await remove(ref(database, `salas/${salaId}/questoes/${questaoId}`));
+
+      try {
+        const response = await fetch(
+          `http://localhost:3001/questoes/${questaoId}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Erro HTTP! status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("Erro na requisição fetch:", error);
+      }
     }
   }
 
@@ -38,6 +56,35 @@ export function AdminSala() {
     await update(ref(database, `salas/${salaId}/questoes/${questaoId}`), {
       isAnswered: true,
     });
+
+    try {
+      const response = await fetch(
+        `http://localhost:3001/questoes/${questaoId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ respondido: true }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Erro HTTP! status: ${response.status}`);
+      }
+
+      const data = await response.json().catch(() => {
+        return null;
+      });
+
+      if (data) {
+        console.log("Dados da resposta:", data);
+      } else {
+        console.log("A resposta estava vazia ou não era JSON.");
+      }
+    } catch (error) {
+      console.error("Erro na requisição fetch:", error);
+    }
   }
 
   async function responderQuestao(questaoId: string) {
