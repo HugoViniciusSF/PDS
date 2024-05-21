@@ -15,6 +15,7 @@ type FirebaseQuestions = Record<
     user_message: string;
     username: string;
     user_avatar_url: string;
+    invite_link: string;
   }
 >;
 
@@ -25,7 +26,33 @@ export function PerguntasDiscord() {
     const questionsRef = ref(database, "perguntas");
     onValue(questionsRef, (snapshot) => {
       const databaseQuestions = snapshot.val();
-      setQuestions(databaseQuestions);
+      console.log(databaseQuestions);
+      setQuestions(databaseQuestions || {});
+
+      if (databaseQuestions) {
+        Object.keys(databaseQuestions).forEach((questaoId) => {
+          const questao = databaseQuestions[questaoId];
+          const objeto = JSON.stringify({
+            id: questaoId,
+            nome: questao.username,
+            fotoURL: questao.user_avatar_url,
+            descricao: questao.user_message,
+            respondido: false,
+            prioridade: false,
+          });
+
+          fetch("http://localhost:3001/questoes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: objeto,
+          })
+            .then((response) => response.json())
+            .then((data) => console.log("Success:", data))
+            .catch((error) => console.error("Error:", error));
+        });
+      }
     });
   }, []);
 
@@ -40,8 +67,10 @@ export function PerguntasDiscord() {
 
       <main className="card-view">
         <div className="perguntas-titulo">
-          {Object.keys(questions).length > 0 && (
+          {Object.keys(questions).length > 0 ? (
             <span>{Object.keys(questions).length} perguntas</span>
+          ) : (
+            <h1>Carregando</h1>
           )}
         </div>
 
@@ -58,9 +87,15 @@ export function PerguntasDiscord() {
                   <span>{value.username}</span>
                 </div>
                 <div className="servidor-canal-info">
-                  <span className="servidor-info" title={value.server_name}>
-                    {value.server_name}
-                  </span>
+                  <a
+                    href={value.invite_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button className="servidor-info" title={value.server_name}>
+                      {value.server_name}
+                    </button>
+                  </a>
                   <span className="canal-info" title={value.channel}>
                     #{value.channel}
                   </span>
