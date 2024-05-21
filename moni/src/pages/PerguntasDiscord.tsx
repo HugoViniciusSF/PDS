@@ -23,7 +23,6 @@ export function PerguntasDiscord() {
 
   useEffect(() => {
     const questionsRef = ref(database, "perguntas");
-
     onValue(questionsRef, (snapshot) => {
       const databaseQuestions = snapshot.val();
       setQuestions(databaseQuestions);
@@ -35,12 +34,12 @@ export function PerguntasDiscord() {
       <header>
         <div className="conteudo">
           <img src={Logo} alt="MoniApp" />
+          <h1>Perguntas do Discord</h1>
         </div>
       </header>
 
-      <main>
+      <main className="card-view">
         <div className="perguntas-titulo">
-          <h1>Perguntas do Discord</h1>
           {Object.keys(questions).length > 0 && (
             <span>{Object.keys(questions).length} perguntas</span>
           )}
@@ -62,7 +61,9 @@ export function PerguntasDiscord() {
                   <span className="servidor-info" title={value.server_name}>
                     {value.server_name}
                   </span>
-                  <span className="canal-info">#{value.channel}</span>
+                  <span className="canal-info" title={value.channel}>
+                    #{value.channel}
+                  </span>
                 </div>
               </div>
               <p className="pergunta-mensagem">{value.user_message}</p>
