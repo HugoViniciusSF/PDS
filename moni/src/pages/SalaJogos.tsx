@@ -83,7 +83,6 @@ export function SalaJogos() {
 
     fetchData();
   }, [salaId]);
-
   async function enviarJogo(event: FormEvent) {
     event.preventDefault();
     if (topico.trim() === "") {
@@ -101,13 +100,14 @@ export function SalaJogos() {
           "Content-Type": "application/json",
         },
       });
+      const data: Jogo[] = await response.json();
+      setJogos(data);
 
       if (!response.ok) {
         throw new Error("Erro ao buscar informações do jogo");
       }
 
       const jogoData = await response.json();
-      console.log(response);
 
       const novoJogo: Jogo = {
         id: jogos.length + 1,
