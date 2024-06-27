@@ -55,18 +55,6 @@ export function NovaSalaJogos() {
               onChange={(event) => setNovaSala(event.target.value)}
               value={novaSala}
             />
-            <input
-              type="text"
-              placeholder="Gênero dos jogos"
-              onChange={(event) => setGenero(event.target.value)}
-              value={genero}
-            />
-            <input
-              type="text"
-              placeholder="Plataforma dos jogos"
-              onChange={(event) => setPlataforma(event.target.value)}
-              value={plataforma}
-            />
             <Button type="submit">Crie a sala</Button>
           </form>
           <p>

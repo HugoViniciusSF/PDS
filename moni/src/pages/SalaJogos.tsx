@@ -13,9 +13,8 @@ import {
   DataSnapshot,
   onValue,
   off,
-  set
+  set,
 } from "firebase/database";
-import { useSala } from "../hooks/useSala";
 
 type Jogo = {
   id: number;
@@ -109,7 +108,7 @@ export function SalaJogos() {
       }
 
       const data: Jogo[] = await response.json();
-      console.log('Jogos fetched from API:', data);
+      console.log("Jogos fetched from API:", data);
 
       const jogosRef = ref(database, `salas/${salaId}/jogos`);
       const novosJogos: Jogo[] = [];
@@ -130,16 +129,14 @@ export function SalaJogos() {
         novosJogos.push(novoJogo);
       }
 
-      console.log('Novos jogos salvos no Firebase:', novosJogos);
+      console.log("Novos jogos salvos no Firebase:", novosJogos);
 
       setJogos((jogos) => [...jogos, ...novosJogos]);
       setTopico("");
-
     } catch (error) {
       console.error("Erro ao adicionar jogo:", error);
     }
   }
-
 
   return (
     <div id="pagina-sala">
@@ -185,7 +182,9 @@ export function SalaJogos() {
             ) : (
               <span>
                 Para adicionar um jogo,{" "}
-                <button type="button" onClick={fazerLogin}>faça seu login</button>
+                <button type="button" onClick={fazerLogin}>
+                  faça seu login
+                </button>
               </span>
             )}
             <Button type="submit" disabled={!usuario}>
@@ -203,12 +202,6 @@ export function SalaJogos() {
               <div className="adicionado-por">
                 <span>Plataformas: {jogo.plataformas}</span>
                 <span>Gêneros: {jogo.generos}</span>
-                {usuario && (
-                  <img
-                    src={usuario.avatar}
-                    alt={`Adicionado por ${usuario.nome}`}
-                  />
-                )}
               </div>
             </div>
           ))}
