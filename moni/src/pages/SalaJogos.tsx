@@ -13,6 +13,7 @@ import {
   DataSnapshot,
   onValue,
   off,
+  set
 } from "firebase/database";
 import { useSala } from "../hooks/useSala";
 
@@ -59,7 +60,7 @@ export function SalaJogos() {
             const jogosData = salaData.jogos || {};
             const jogosArray: Jogo[] = Object.entries(jogosData).map(
               ([key, value]: [string, any]) => ({
-                id: parseInt(key), // Convertendo key para number
+                id: parseInt(key, 10), // Convertendo key para number
                 nome: value.nome,
                 imagemURL: value.imagemURL,
                 descricao: value.descricao,
@@ -83,6 +84,7 @@ export function SalaJogos() {
 
     fetchData();
   }, [salaId]);
+
   async function enviarJogo(event: FormEvent) {
     event.preventDefault();
     if (topico.trim() === "") {
@@ -94,41 +96,50 @@ export function SalaJogos() {
     }
 
     try {
+      console.log(`Fetching jogos for topico: ${topico}`);
       const response = await fetch(`http://localhost:3001/info/${topico}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const data: Jogo[] = await response.json();
-      setJogos(data);
 
       if (!response.ok) {
         throw new Error("Erro ao buscar informações do jogo");
       }
 
-      const jogoData = await response.json();
+      const data: Jogo[] = await response.json();
+      console.log('Jogos fetched from API:', data);
 
-      const novoJogo: Jogo = {
-        id: jogos.length + 1,
-        nome: jogoData.nome,
-        imagemURL: jogoData.imagemURL,
-        descricao: jogoData.descricao,
-        generos: jogoData.generos || null,
-        plataformas: jogoData.plataformas || null,
-      };
-
-      // Atualizando a lista de jogos localmente
-      setJogos((jogos) => [...jogos, novoJogo]);
-      setTopico(""); // Limpar o campo de texto após adicionar o jogo
-
-      // Salvando o novo jogo no banco de dados (Firebase)
       const jogosRef = ref(database, `salas/${salaId}/jogos`);
-      await push(jogosRef, novoJogo);
+      const novosJogos: Jogo[] = [];
+
+      for (const jogoData of data) {
+        const novoJogoRef = push(jogosRef);
+        const novoJogoId = Date.now();
+        const novoJogo: Jogo = {
+          id: novoJogoId,
+          nome: jogoData.nome,
+          imagemURL: jogoData.imagemURL,
+          descricao: jogoData.descricao,
+          generos: jogoData.generos || null,
+          plataformas: jogoData.plataformas || null,
+        };
+
+        await set(novoJogoRef, novoJogo);
+        novosJogos.push(novoJogo);
+      }
+
+      console.log('Novos jogos salvos no Firebase:', novosJogos);
+
+      setJogos((jogos) => [...jogos, ...novosJogos]);
+      setTopico("");
+
     } catch (error) {
       console.error("Erro ao adicionar jogo:", error);
     }
   }
+
 
   return (
     <div id="pagina-sala">
@@ -174,7 +185,7 @@ export function SalaJogos() {
             ) : (
               <span>
                 Para adicionar um jogo,{" "}
-                <button onClick={fazerLogin}>faça seu login</button>
+                <button type="button" onClick={fazerLogin}>faça seu login</button>
               </span>
             )}
             <Button type="submit" disabled={!usuario}>
