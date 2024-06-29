@@ -11,6 +11,7 @@ type QuestaoProps = {
   children?: ReactNode;
   isAnswered?: boolean;
   isHighlighted?: boolean;
+  resposta?: string;
 };
 
 export function Questao({
@@ -18,6 +19,7 @@ export function Questao({
   author,
   isAnswered = false,
   isHighlighted = false,
+  resposta = "",
   children,
 }: QuestaoProps) {
   return (

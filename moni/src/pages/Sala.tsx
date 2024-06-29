@@ -1,6 +1,6 @@
 import "../styles/sala.scss";
 import { useParams } from "react-router-dom";
-import Logo from "../assets/images/MONI_gif.gif";
+import Logo from "../assets/images/logo.png";
 import { Button } from "../components/Button";
 import { CodigoSala } from "../components/CodigoSala";
 import { FormEvent, useEffect, useState } from "react";
@@ -27,9 +27,20 @@ type FirebaseQuestion = {
     isAnswered: boolean;
     isHighlighted: boolean;
     likes: Record<string, { authorId: string }>;
+    resposta?: string;
+    respostas?: {
+      [key: string]: {
+        author: {
+          name: string;
+          avatar: string;
+        };
+        resposta: string;
+      };
+    };
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 type Questao = {
   id: string;
   author: {
@@ -41,6 +52,15 @@ type Questao = {
   isHighlighted: boolean;
   likeCount: number;
   likeId: string | undefined;
+  resposta?: string;
+  respostas?: {
+    id: string;
+    author: {
+      name: string;
+      avatar: string;
+    };
+    resposta: string;
+  }[];
 };
 
 type SalaParams = {
@@ -52,14 +72,19 @@ export function Sala() {
   const params = useParams<SalaParams>();
 
   const [novaQuestao, setNovaQuestao] = useState("");
+  const [respostasEmEdicao, setRespostasEmEdicao] = useState<{
+    [key: string]: string;
+  }>({});
   const salaId = params.id;
   const [questoes, setQuestoes] = useState<Questao[]>([]);
   const [titulo, setTitulo] = useState("");
+
   async function fazerLogin() {
     if (!usuario) {
       await signInWithGoogle();
     }
   }
+
   useEffect(() => {
     const salaRef: DatabaseReference = ref(database, `salas/${salaId}`);
 
@@ -83,6 +108,15 @@ export function Sala() {
                   likeId: Object.entries(likes).find(
                     ([, like]) => like.authorId === usuario?.id
                   )?.[0],
+                  resposta: value.resposta, // Adicionando resposta à Questão
+                  respostas: value.respostas
+                    ? Object.entries(value.respostas).map(
+                        ([respostaKey, respostaValue]) => ({
+                          id: respostaKey,
+                          ...respostaValue,
+                        })
+                      )
+                    : [],
                 };
               }
             );
@@ -127,9 +161,7 @@ export function Sala() {
     const questaoRef = ref(database, `salas/${salaId}/questoes`);
     const newQuestaoRef = push(questaoRef);
     await set(newQuestaoRef, questao);
-    console.log(newQuestaoRef);
     const questaoId = newQuestaoRef.key;
-    console.log(questaoId);
     setNovaQuestao("");
 
     const objeto = JSON.stringify({
@@ -141,7 +173,7 @@ export function Sala() {
       prioridade: false,
     });
 
-    // conexao com o bd usando fetch
+    // Conexão com o backend usando fetch
     fetch("http://localhost:3001/questoes", {
       method: "POST",
       headers: {
@@ -166,6 +198,43 @@ export function Sala() {
     } else {
       // Se o usuário ainda não deu like, adiciona o like
       await push(questaoLikesRef, { authorId: usuario.id });
+    }
+  }
+
+  async function enviarResposta(questaoId: string, resposta: string) {
+    const questaoAtual = questoes.find((q) => q.id === questaoId);
+
+    if (!questaoAtual) {
+      console.error(`Questão com id ${questaoId} não encontrada.`);
+      return;
+    }
+
+    // Atualiza localmente a resposta na questão correspondente
+    const updatedQuestoes = questoes.map((q) =>
+      q.id === questaoId ? { ...q, resposta } : q
+    );
+    setQuestoes(updatedQuestoes);
+
+    // Limpa o campo de resposta localmente
+    setRespostasEmEdicao({
+      ...respostasEmEdicao,
+      [questaoId]: "",
+    });
+
+    // Verifica se a resposta não está vazia antes de enviar para o Firebase
+    if (resposta.trim() !== "") {
+      const questaoRef = ref(
+        database,
+        `salas/${salaId}/questoes/${questaoId}/respostas`
+      );
+      const newRespostaRef = push(questaoRef);
+      await set(newRespostaRef, {
+        author: {
+          name: usuario?.nome,
+          avatar: usuario?.avatar,
+        },
+        resposta,
+      });
     }
   }
 
@@ -214,14 +283,14 @@ export function Sala() {
             a.isAnswered === b.isAnswered ? 0 : a.isAnswered ? 1 : -1
           )
           .map((questao) => (
-            <Questao
-              key={questao.id}
-              content={questao.content}
-              author={questao.author}
-              isAnswered={questao.isAnswered}
-              isHighlighted={questao.isHighlighted}
-            >
-              {!questao.isAnswered && (
+            <div key={questao.id} className="questao-container">
+              <Questao
+                content={questao.content}
+                author={questao.author}
+                isAnswered={questao.isAnswered}
+                isHighlighted={questao.isHighlighted}
+                resposta={questao.resposta}
+              >
                 <button
                   className={`like-button ${questao.likeId ? "liked" : ""}`}
                   type="button"
@@ -229,24 +298,48 @@ export function Sala() {
                   onClick={() => LikeQuestao(questao.id, questao.likeId)}
                 >
                   {questao.likeCount > 0 && <span>{questao.likeCount}</span>}
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V13C2 12.4696 2.21071 11.9609 2.58579 11.5858C2.96086 11.2107 3.46957 11 4 11H7M14 9V5C14 4.20435 13.6839 3.44129 13.1213 2.87868C12.5587 2.31607 11.7956 2 11 2L7 11V22H18.28C18.7623 22.0055 19.2304 21.8364 19.5979 21.524C19.9654 21.2116 20.2077 20.7769 20.28 20.3L21.66 11.3C21.7035 11.0134 21.6842 10.7207 21.6033 10.4423C21.5225 10.1638 21.3821 9.90629 21.1919 9.68751C21.0016 9.46873 20.7661 9.29393 20.5016 9.17522C20.2371 9.0565 19.9499 8.99672 19.66 9H14Z"
-                      stroke="#737380"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  Curtir
                 </button>
+                {!questao.isAnswered && (
+                  <div className="resposta-container">
+                    <textarea
+                      placeholder="Digite sua resposta..."
+                      value={respostasEmEdicao[questao.id] || ""}
+                      onChange={(event) =>
+                        setRespostasEmEdicao({
+                          ...respostasEmEdicao,
+                          [questao.id]: event.target.value,
+                        })
+                      }
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        enviarResposta(
+                          questao.id,
+                          respostasEmEdicao[questao.id] || ""
+                        )
+                      }
+                    >
+                      Enviar resposta
+                    </button>
+                  </div>
+                )}
+              </Questao>
+              {questao.respostas && questao.respostas.length > 0 && (
+                <div className="respostas">
+                  <h3>Respostas:</h3>
+                  {questao.respostas.map((resposta) => (
+                    <div key={resposta.id} className="resposta">
+                      <p>
+                        <strong>{resposta.author.name}:</strong>{" "}
+                        {resposta.resposta}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               )}
-            </Questao>
+            </div>
           ))}
       </main>
     </div>
