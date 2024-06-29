@@ -1,6 +1,6 @@
 import "../styles/sala.scss";
 import { useParams } from "react-router-dom";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/images/MONI_gif.gif";
 import { Button } from "../components/Button";
 import { CodigoSala } from "../components/CodigoSala";
 import { FormEvent, useEffect, useState } from "react";
@@ -16,7 +16,6 @@ import {
   DataSnapshot,
 } from "firebase/database";
 import { Questao } from "../components/Questao";
-import { useSala } from "../hooks/useSala";
 
 type FirebaseQuestion = {
   [key: string]: {
@@ -163,8 +162,7 @@ export function Sala() {
     );
 
     if (likeId) {
-      // Se o usuário já deu like, remove o like
-      await set(questaoLikesRef, { likeId: null });
+      // Se o usuário já deu like, não pode mais mudar
     } else {
       // Se o usuário ainda não deu like, adiciona o like
       await push(questaoLikesRef, { authorId: usuario.id });

@@ -1,29 +1,38 @@
 .sala-code {
-    height: 60px;
-    border-radius: 7px;
-    overflow: hidden;
-    background: #04b166;
-    border: 10px solid #04b166;
-    cursor: pointer;
-    
-    display: flex;
-  
-    div {
-      padding: 0 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    span {
-      display: block;
-      align-self: center;
-      flex: 1;
-      padding: 0 16px 0 12px;
-      width: 330px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #ffffff;
-      
-    }
+  height: 60px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #04b166;
+  border: 2px solid #04b166;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.3s, transform 0.3s;
+
+  &:hover {
+    border-color: #028e6a;
+    transform: translateY(-2px);
   }
+
+  div {
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 80px;
+  }
+
+  span {
+    flex: 1;
+    padding: 0 16px 0 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo1 from "../assets/images/logo_transparente.png";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/MONI.gif";
 import { FormEvent, useState } from "react";
 import "../styles/pagina-inicial.scss";
 import { Button } from "../components/Button";

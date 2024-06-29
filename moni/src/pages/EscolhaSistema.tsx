@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/option-selector.scss";
 
-import monitoriaImage from "../assets/images/logo.png";
-import jogosImage from "../assets/images/logo.png";
-import reunioesImage from "../assets/images/logo.png";
+import monitoriaImage from "../assets/images/MONI_gif.gif";
+import jogosImage from "../assets/images/select_gif.gif";
+import reunioesImage from "../assets/images/reunion_gif.gif";
 
 export function EscolhaSistema() {
   const navigate = useNavigate();
@@ -15,7 +15,9 @@ export function EscolhaSistema() {
 
   return (
     <div className="container">
-      <h1>Escolha um Sistema</h1>
+      <h1>
+        <strong>Escolha um Sistema</strong>
+      </h1>
       <div className="options">
         <div
           className="option-container monitoria"

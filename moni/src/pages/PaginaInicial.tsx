@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { database } from "../services/firebase";
 import { get, ref } from "firebase/database";
 import logo1 from "../assets/images/logo_transparente.png";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/MONI.gif";
 import { Button } from "../components/Button";
 import "../styles/pagina-inicial.scss";
 import { ToastContainer, toast } from "react-toastify";

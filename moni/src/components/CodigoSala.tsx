@@ -9,11 +9,15 @@ export function CodigoSala(props: CodigoSalaProps) {
     navigator.clipboard.writeText(props.code);
   }
   return (
-    <button className="sala-code" onClick={copyRoomCodeToClipboard}>
+    <button
+      className="sala-code"
+      onClick={copyRoomCodeToClipboard}
+      title="Copiar código da sala"
+    >
       <div>
         <img src={copyImg} alt="copiar codigo do quarto" />
       </div>
-      <span>Sala #{props.code}</span>
+      <span>#{props.code}</span>
     </button>
   );
 }

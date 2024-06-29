@@ -106,6 +106,9 @@ export function SalaJogos() {
       if (!response.ok) {
         throw new Error("Erro ao buscar informações do jogo");
       }
+      if (!response.ok) {
+        throw new Error("Erro ao buscar informações do jogo");
+      }
 
       const data: Jogo[] = await response.json();
       console.log("Jogos fetched from API:", data);
@@ -139,7 +142,7 @@ export function SalaJogos() {
   }
 
   return (
-    <div id="pagina-sala">
+    <div id="pagina-sala-jogos">
       <header>
         <div className="conteudo">
           <img src={Logo} alt="MoniApp" />

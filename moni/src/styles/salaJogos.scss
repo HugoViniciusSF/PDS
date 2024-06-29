@@ -1,4 +1,4 @@
-#pagina-sala {
+#pagina-sala-jogos {
   header {
     background-color: #202225;
     padding: 1rem 0;
@@ -97,8 +97,18 @@
       }
 
       textarea {
-        height: 120px;
+        width: 100%;
+        border: 1px solid #ddd;
+        padding: 12px;
+        border-radius: 4px;
+        background-color: #f9f9f9;
         resize: vertical;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: #4c6ef5;
+        }
       }
 
       .form-rodape {
@@ -127,20 +137,6 @@
         span {
           font-size: 0.9rem;
           color: #666;
-        }
-
-        button {
-          background-color: #7159c1;
-          color: #fff;
-          border: none;
-          padding: 0.5rem 1rem;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-
-          &:hover {
-            background-color: #5f4ac6;
-          }
         }
       }
     }
