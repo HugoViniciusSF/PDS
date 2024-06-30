@@ -16,6 +16,7 @@ import {
   DataSnapshot,
 } from "firebase/database";
 import { Questao } from "../components/Questao";
+import { BuscarQuestoes } from "../components/BuscarQuestoes/BuscarQuestoes";
 
 type FirebaseQuestion = {
   [key: string]: {
@@ -66,6 +67,12 @@ type Questao = {
 type SalaParams = {
   id: string;
 };
+type QuestoesStack = {
+  id: number;
+  nome: string;
+  imagemURL: string;
+  descricao: string;
+};
 
 export function Sala() {
   const { usuario, signInWithGoogle } = useAutenticacao();
@@ -78,7 +85,7 @@ export function Sala() {
   const salaId = params.id;
   const [questoes, setQuestoes] = useState<Questao[]>([]);
   const [titulo, setTitulo] = useState("");
-
+  const [questoesBuscadas, setQuestoesBuscadas] = useState<QuestoesStack[]>([]);
   async function fazerLogin() {
     if (!usuario) {
       await signInWithGoogle();
@@ -182,6 +189,9 @@ export function Sala() {
       body: objeto,
     });
   }
+  const handleBuscarQuestoes = (questoes: QuestoesStack[]) => {
+    setQuestoesBuscadas(questoes);
+  };
 
   async function LikeQuestao(questaoId: string, likeId: string | undefined) {
     if (!usuario) {
@@ -237,7 +247,6 @@ export function Sala() {
       });
     }
   }
-
   return (
     <div id="pagina-sala">
       <header>
@@ -248,99 +257,103 @@ export function Sala() {
       </header>
 
       <main>
-        <form onSubmit={enviarQuestao}>
-          <div className="sala-titulo">
-            <h1>Sala {titulo}</h1>
-            {questoes.length > 0 && <span>{questoes.length} perguntas</span>}
-          </div>
+        <BuscarQuestoes onBuscar={handleBuscarQuestoes} />
+        <div className="conteudo-principal">
+          <form onSubmit={enviarQuestao}>
+            <div className="sala-titulo">
+              <h1>Sala {titulo}</h1>
+              {questoes.length > 0 && <span>{questoes.length} perguntas</span>}
+            </div>
 
-          <textarea
-            placeholder="O que você quer perguntar?"
-            onChange={(event) => setNovaQuestao(event.target.value)}
-            value={novaQuestao}
-          />
-          <div className="form-rodape">
-            {usuario ? (
-              <div className="usuario-info">
-                <img src={usuario.avatar} alt={usuario.nome} />
-                <span>{usuario.nome}</span>
-              </div>
-            ) : (
-              <span>
-                Para enviar uma pergunta,{" "}
-                <button onClick={fazerLogin}>faça seu login</button>
-              </span>
-            )}
-            <Button type="submit" disabled={!usuario}>
-              Enviar pergunta
-            </Button>
-          </div>
-        </form>
+            <textarea
+              placeholder="O que você quer perguntar?"
+              onChange={(event) => setNovaQuestao(event.target.value)}
+              value={novaQuestao}
+            />
+            <div className="form-rodape">
+              {usuario ? (
+                <div className="usuario-info">
+                  <img src={usuario.avatar} alt={usuario.nome} />
+                  <span>{usuario.nome}</span>
+                </div>
+              ) : (
+                <span>
+                  Para enviar uma pergunta,{" "}
+                  <button onClick={fazerLogin}>faça seu login</button>
+                </span>
+              )}
+              <Button type="submit" disabled={!usuario}>
+                Enviar pergunta
+              </Button>
+            </div>
+          </form>
 
-        {questoes
-          .slice()
-          .sort((a, b) =>
-            a.isAnswered === b.isAnswered ? 0 : a.isAnswered ? 1 : -1
-          )
-          .map((questao) => (
-            <div key={questao.id} className="questao-container">
-              <Questao
-                content={questao.content}
-                author={questao.author}
-                isAnswered={questao.isAnswered}
-                isHighlighted={questao.isHighlighted}
-                resposta={questao.resposta}
-              >
-                <button
-                  className={`like-button ${questao.likeId ? "liked" : ""}`}
-                  type="button"
-                  aria-label="Marcar como gostei"
-                  onClick={() => LikeQuestao(questao.id, questao.likeId)}
+          {questoes
+            .slice()
+            .sort((a, b) =>
+              a.isAnswered === b.isAnswered ? 0 : a.isAnswered ? 1 : -1
+            )
+            .map((questao) => (
+              <div key={questao.id} className="questao-container">
+                <Questao
+                  content={questao.content}
+                  author={questao.author}
+                  isAnswered={questao.isAnswered}
+                  isHighlighted={questao.isHighlighted}
+                  resposta={questao.resposta}
                 >
-                  {questao.likeCount > 0 && <span>{questao.likeCount}</span>}
-                  Curtir
-                </button>
-                {!questao.isAnswered && (
-                  <div className="resposta-container">
-                    <textarea
-                      placeholder="Digite sua resposta..."
-                      value={respostasEmEdicao[questao.id] || ""}
-                      onChange={(event) =>
-                        setRespostasEmEdicao({
-                          ...respostasEmEdicao,
-                          [questao.id]: event.target.value,
-                        })
-                      }
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        enviarResposta(
-                          questao.id,
-                          respostasEmEdicao[questao.id] || ""
-                        )
-                      }
-                    >
-                      Enviar resposta
-                    </button>
+                  <button
+                    className={`like-button ${questao.likeId ? "liked" : ""}`}
+                    type="button"
+                    aria-label="Marcar como gostei"
+                    onClick={() => LikeQuestao(questao.id, questao.likeId)}
+                  >
+                    {questao.likeCount > 0 && <span>{questao.likeCount}</span>}
+                    Curtir
+                  </button>
+                  {!questao.isAnswered && (
+                    <div className="resposta-container">
+                      <textarea
+                        placeholder="Digite sua resposta..."
+                        value={respostasEmEdicao[questao.id] || ""}
+                        onChange={(event) =>
+                          setRespostasEmEdicao({
+                            ...respostasEmEdicao,
+                            [questao.id]: event.target.value,
+                          })
+                        }
+                      />
+                      <button
+                        type="button"
+                        disabled={!usuario}
+                        onClick={() =>
+                          enviarResposta(
+                            questao.id,
+                            respostasEmEdicao[questao.id] || ""
+                          )
+                        }
+                      >
+                        Enviar resposta
+                      </button>
+                    </div>
+                  )}
+                </Questao>
+                {questao.respostas && questao.respostas.length > 0 && (
+                  <div className="respostas">
+                    <h3>Respostas:</h3>
+                    {questao.respostas.map((resposta) => (
+                      <div key={resposta.id} className="resposta">
+                        <p>
+                          <strong>{resposta.author.name}:</strong>{" "}
+                          {resposta.resposta}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 )}
-              </Questao>
-              {questao.respostas && questao.respostas.length > 0 && (
-                <div className="respostas">
-                  <h3>Respostas:</h3>
-                  {questao.respostas.map((resposta) => (
-                    <div key={resposta.id} className="resposta">
-                      <p>
-                        <strong>{resposta.author.name}:</strong>{" "}
-                        {resposta.resposta}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+              </div>
+            ))}
+        </div>
       </main>
     </div>
   );
