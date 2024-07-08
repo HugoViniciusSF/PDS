@@ -47,7 +47,7 @@ export function EscolhaSistema() {
         </div>
         <div
           className="option-container reunioes"
-          onClick={() => redirectTo("/reunioes")}
+          onClick={() => redirectTo("/reuniao")}
         >
           <div className="option-content">
             <img

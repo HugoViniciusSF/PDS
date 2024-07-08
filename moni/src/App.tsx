@@ -11,6 +11,9 @@ import { EscolhaSistema } from "./pages/EscolhaSistema";
 import { PaginaInicialJogos } from "./pages/PaginaInicialJogos";
 import { NovaSalaJogos } from "./pages/NovaSalaJogos";
 import { SalaJogos } from "./pages/SalaJogos";
+import { PaginaInicialReuniao } from "./pages/PaginaInicialReuniao";
+import { NovaSalaReuniao } from "./pages/NovaSalaReuniao";
+import { SalaReuniao } from "./pages/SalaReunião";
 function App() {
   return (
     <BrowserRouter>
@@ -19,10 +22,13 @@ function App() {
           <Route path="/" element={<EscolhaSistema />} />
           <Route path="/jogos" element={<PaginaInicialJogos />} />
           <Route path="/moniapp" element={<PaginaInicial />} />
+          <Route path="/reuniao" element={<PaginaInicialReuniao />} />
           <Route path="/salas/nova" element={<NovaSala />} />
           <Route path="/salas/novaSalaJogos" element={<NovaSalaJogos />} />
+          <Route path="/salas/novaSalaReuniao" element={<NovaSalaReuniao />} />
           <Route path="/salas/:id" element={<Sala />} />
           <Route path="/salasJogos/:id" element={<SalaJogos />} />
+          <Route path="/salasReuniao/:id" element={<SalaReuniao />} />
           <Route path="/admin/salas/:id" element={<AdminSala />} />
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="overview" element={<Dashboard />} />
