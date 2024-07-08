@@ -3,10 +3,10 @@ import { useAutenticacao } from "../hooks/useAutenticacao";
 import { FormEvent, useState } from "react";
 import { database } from "../services/firebase";
 import { get, ref } from "firebase/database";
-import logo1 from "../assets/images/logo_transparente.png";
-import logo from "../assets/images/logo.png";
+import logo1 from "../assets/images/select_gif.gif";
+import logo from "../assets/images/select_2.png";
 import { Button } from "../components/Button";
-import "../styles/pagina-inicial.scss";
+import "../styles/pagina-inicial-jogos.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -91,7 +91,7 @@ export function PaginaInicialJogos() {
   }
 
   return (
-    <div id="page-auth">
+    <div id="page-auth-jogos">
       <aside>
         <img src={logo1} alt="Ilustração da logo" />
         <strong>Conecte com seus amigos e jogue!</strong>

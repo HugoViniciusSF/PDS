@@ -1,0 +1,131 @@
+/* Estilos para a página de autenticação */
+#page-auth-jogos {
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+  
+  /* Estilos para a barra lateral */
+  aside {
+    flex: 3;
+    background: #004AAD;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  
+    img {
+      max-width: 80%;
+      align-self: center;
+    }
+  
+    strong {
+      font: 700 36px 'Poppins', sans-serif;
+      line-height: 1.2;
+      margin-top: 32px;
+      text-align: center;
+    }
+  
+    p {
+      font-size: 20px;
+      line-height: 1.5;
+      margin-top: 16px;
+      text-align: center;
+      
+    }
+  }
+  
+  
+  /* Estilos para a seção principal */
+  main {
+    flex: 8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e2e2e;
+  }
+  
+  /* Estilos para o conteúdo principal */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    align-items: center;
+    h1{
+      color: #004AAD;
+      font-size: 26px;
+    }
+  
+    h2 {
+      font-size: 28px;
+      margin: 48px 0 24px;
+      font-family: 'Poppins', sans-serif;
+      color: #004AAD;
+    }
+  
+    form {
+      width: 100%;
+    }
+  
+    input {
+      height: 65px;
+      border-radius: 5px;
+      padding: 24px;
+      background: #FFF;
+      width: 100%;
+      margin-bottom: 16px;
+      font-size: 18px;
+      color: #333;
+      transition: border-color 0.3s;
+    }
+    p{
+      color: #004AAD;
+      margin-top: 10px;
+    }
+    button {
+      height: 65px;
+      border-radius: 6px;
+      padding: 0 24px;
+      background-color: rgb(75, 74, 74);
+      color: #FFF;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+  
+    button:hover {
+      background-color: #004AAD;
+    }
+  
+    
+  }
+  
+  /* Estilos para o botão de criar sala */
+  .create-room {
+    margin-top: 32px;
+    height: 50px;
+    border-radius: 25px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 0;
+    transition: filter 0.2s;
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+  
+  /* Estilos para o separador */
+  .separator {
+    font-size: 16px;
+    color: #FFF;
+    margin-top: 25px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  
+  }
+  }

@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo1 from "../assets/images/logo_transparente.png";
-import logo from "../assets/images/logo.png";
+import logo1 from "../assets/images/select_gif.gif";
+import logo from "../assets/images/select_2.png";
 import { FormEvent, useState } from "react";
-import "../styles/pagina-inicial.scss";
+import "../styles/pagina-inicial-jogos.scss";
 import { Button } from "../components/Button";
 import { useAutenticacao } from "../hooks/useAutenticacao";
 import { database } from "../services/firebase";
@@ -37,7 +37,7 @@ export function NovaSalaJogos() {
   }
 
   return (
-    <div id="page-auth">
+    <div id="page-auth-jogos">
       <aside>
         <img src={logo1} alt="Logo" />
         <strong>Crie sua sala e jogue!</strong>
