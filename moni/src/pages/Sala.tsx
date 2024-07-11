@@ -17,7 +17,8 @@ import {
 } from "firebase/database";
 import { Questao } from "../components/Questao";
 import { BuscarQuestoes } from "../components/BuscarQuestoes/BuscarQuestoes";
-
+import Notificacao from "./Notificacao";
+import Modal from "react-modal";
 type FirebaseQuestion = {
   [key: string]: {
     author: {
@@ -86,6 +87,9 @@ export function Sala() {
   const [questoes, setQuestoes] = useState<Questao[]>([]);
   const [titulo, setTitulo] = useState("");
   const [questoesBuscadas, setQuestoesBuscadas] = useState<QuestoesStack[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   async function fazerLogin() {
     if (!usuario) {
       await signInWithGoogle();
@@ -259,6 +263,26 @@ export function Sala() {
       <main>
         <BuscarQuestoes onBuscar={handleBuscarQuestoes} />
         <div className="conteudo-principal">
+          <button className="button-abrir" onClick={openModal}>
+            Abrir Notificação
+          </button>
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            contentLabel="Notificação"
+            className="modal"
+            overlayClassName="overlay"
+          >
+            <div className="modal-content">
+              <div className="modal-header">
+                <h2 className="modal-title">Notificação</h2>
+                <button className="modal-close" onClick={closeModal}>
+                  Fechar
+                </button>
+              </div>
+              <Notificacao />
+            </div>
+          </Modal>
           <form onSubmit={enviarQuestao}>
             <div className="sala-titulo">
               <h1>Sala {titulo}</h1>

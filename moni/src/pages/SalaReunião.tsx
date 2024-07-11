@@ -15,7 +15,8 @@ import {
   off,
   set,
 } from "firebase/database";
-
+import Notificacao from "./Notificacao";
+import Modal from "react-modal";
 type Reuniao = {
   id: number;
   nome: string;
@@ -50,7 +51,9 @@ export function SalaReuniao() {
   const [mensagens, setMensagens] = useState<Mensagem[]>([]);
   const [novaMensagem, setNovaMensagem] = useState<string>("");
   const [filtroNoticias, setFiltroNoticias] = useState<string>("");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   async function fazerLogin() {
     if (!usuario) {
       await signInWithGoogle();
@@ -193,6 +196,26 @@ export function SalaReuniao() {
 
       <main>
         <div className="conteudo-principal">
+          <button className="button-abrir" onClick={openModal}>
+            Abrir Notificação
+          </button>
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            contentLabel="Notificação"
+            className="modal"
+            overlayClassName="overlay"
+          >
+            <div className="modal-content">
+              <div className="modal-header">
+                <h2 className="modal-title">Notificação</h2>
+                <button className="modal-close" onClick={closeModal}>
+                  Fechar
+                </button>
+              </div>
+              <Notificacao />
+            </div>
+          </Modal>
           <form onSubmit={enviarReuniao}>
             <div className="sala-titulo">
               <h1>Sala de Reuniao: {titulo}</h1>
