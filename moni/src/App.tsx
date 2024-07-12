@@ -25,7 +25,7 @@ function App() {
           <Route path="/reuniao" element={<PaginaInicialReuniao />} />
           <Route path="/salas/nova" element={<NovaSala />} />
           <Route path="/salas/novaSalaJogos" element={<NovaSalaJogos />} />
-          <Route path="/salas/novaSalaReuniao" element={<NovaSalaReuniao />} />
+          <Route path="/novaSalaReuniao" element={<NovaSalaReuniao />} />
           <Route path="/salas/:id" element={<Sala />} />
           <Route path="/salasJogos/:id" element={<SalaJogos />} />
           <Route path="/salasReuniao/:id" element={<SalaReuniao />} />

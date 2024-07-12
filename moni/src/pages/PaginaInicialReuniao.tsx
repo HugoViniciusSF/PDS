@@ -63,7 +63,7 @@ export function PaginaInicialReuniao() {
     if (!usuario) {
       await signInWithGoogle();
     }
-    navigate("/salas/novaSalaReuniao");
+    navigate("/novaSalaReuniao");
   }
 
   async function entrarSala(event: FormEvent) {
@@ -85,7 +85,7 @@ export function PaginaInicialReuniao() {
     }
     notificacaoSucesso();
     setTimeout(() => {
-      navigate(`/salas/novaSalaReuniao/${codigoSala}`);
+      navigate(`/salasReuniao/${codigoSala}`);
     }, 3000);
   }
 
